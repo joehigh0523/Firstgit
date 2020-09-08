@@ -1,0 +1,1825 @@
+IQmeasure 3.1.3.39 Release Note:  (2020-01-17)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-M/IQxstream-5G(IQxstream-5GX)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-M/ IQxstream-5G/ IQxstream-5GX
+        1. Added spec_duration parameter to LP_Segms_AnalyzeZigbee() to specify the duration for spectrum mask calculations.
+        2. Add IQgig attribute tester type. User can query LP_GetTesterAttribute("isIQgig") to decide the current connecting tester is IQTYPE_GIG_RF, IQTYPE_GIG_IF or IQTYPE_GIG_5G.
+        3. Optimize temperature compensation.
+        4. Disable preamble smooting feature for legacy IQxel-80/160/280 testers.
+        5. Optimize reference file loading for LP_Analyze80211ac functions.
+        6. Improve auto reference level adjust on IQgig-IF for better EVM.
+        7. Fix wrong return of LP_IQXEL_GetTesterType() for MW7G tester.
+        8. Fix crash in LP_InsertPathLossTablePoints() when path_loss table is very large.
+        9. Fix memory leak on mask values fetch ("y", "Avg_y") and tone results fetch.
+        10.Add HE/VHT 160Mz MPS Mask measurement.
+        11.Fix crash when user calls IQmeasure function again if user doesn't call LP_Init after LP_Term.
+        12.Set mask high limit type to 11ax or 11ax_80p80 in LP_AnalyzeTechnologyFFT if technology = 6.
+        13.Add support for time domain symbol timing by setting enableSymTimingCorr = 2 in LP_Analyze80211ac/ax.
+        14.Fix STA and AP TBT failed on IQxel-MW7G by setting RFD trigger source and apply RFD trigger commands.
+        15.Fix VSA/VSG out of memory handling in LP_SetVsgModulation and MPS waveform loading when too many waveforms are loaded in VSG memory.
+        
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.35 Release Note:  (2019-09-10)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-M/IQxstream-5G(IQxstream-5GX)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-M/ IQxstream-5G/ IQxstream-5GX
+        1. Added a new parameter in LP_WaveGen_OFDM() to configure the primary/secondary 80MHz RU allocation, freqSeg80MIndexTFR.
+        2. Fixed an issue with frequency swapped 80+80 signal analysis.
+		3. Added a keyword to fetch HE-SIGB common bits, "sigb_common_bits".
+		4. Added a parameter in the ZigBee analyze function which specifies spectrum measurement duration.
+        
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.34 Release Note:  (2019-08-13)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-M/IQxstream-5G(IQxstream-5GX)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-M/ IQxstream-5G/ IQxstream-5GX
+        1. Fix LP_GetVersion crash, due to file open to wrong path of del_all.js.
+        
+***************************************************************************************************************************************************************************************************************************** 
+
+IQmeasure 3.1.3.33 Release Note:  (2019-08-08)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-M/IQxstream-5G(IQxstream-5GX)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-M/ IQxstream-5G/ IQxstream-5GX
+        1. [APRX] Suggest to set SRATE as 240M to resolve BW160 error. 
+        2. [APRX] Wrong applying SFO on HE_TB PPDU waveform. 
+        3. [APRX] VSG timeout when sending 1000 HE TB PPDU in some cases HE TB PPDU duration is long enough. 
+        4. [APRX Sequence Builder] Renerate waveform with adjusted packet gap will eliminate SFO degradation on original waveform. 
+        5. Fixing flow looping issue. Stop VSG issue with playing CW waveform.  Next loop will not run TX test. Added option -1 to EnableVsgRF(-1); 0 = VSG;POW:STAT OFF, 1 = VSG;POW:STAT ON, -1 = VSG;MRST
+        6. [IQmeasure_SCPI/Analyze80211ad_Segms] added AmplitudeTracking on/off function
+        7. Modify LP_SetVsa_Trigger to make TRIG:GAP allow ns precision.
+        8. Update SetVsgCw in IQmeasure for 11ad.
+        9. [IQlite/IQmeasure]Added CATM support to IQXSTREAM-5G AND IQXSTREAM-5GX. Previously CATM can only be run on IQXSTREAM-M.
+        10. Fixed a bug which mixed NBIOT with CATM.
+        11. [IQLITE-636][IQmeasure_SCPI] added spectrum limit type for 11AX_80P80
+        
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.32 Release Note:  (2019-07-04)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-M/IQxstream-5G(IQxstream-5GX)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-M/ IQxstream-5G/ IQxstream-5GX
+       
+       0. IQmeasure only supports connectivity functions for IQxstream series testers.
+       1. Split tester type IQTYPE_XEL_MW7G to IQTYPE_XEL_M8W7G, IQTYPE_XEL_M16W7G, and IQTYPE_XEL_M2W7G in IQTESTER_TYPE enum values.
+       2. LP AnalyzeBluetooth_Segms: block some tester type which doesn't support ACP BW20M analysis configuration in verifying 2LE.
+       3. AnalyzeBluetooth: Add support for setting sync work auto. User can use LP_SetAnalysisParameterInteger("AnalyzeBluetooth", 1 or 0) to enable or disable LE sync word auto parameter in BLE measurement.
+       4. Fix random error when saving tester file to local.
+       5. Fix APT LP_Async_RequestTx and LP_Async_RequestRx potential error.
+       6. Fix ApplyRFCorrection function error in MIMO and 2 testers stack conditions.
+       7. Implement preamble averaging support for Analyze80211n and Analyze80211ac functions. User can user LP_SetMode("averagePreambleOFDM", 0 or 1) to disable or enable preamble averaging analysis.
+       8. Fix ApplyRFCorrectionExt function error in IQxstream-M tester.
+       9. Fix decoding PSDU is not working in Analyze80211ac functions.
+       10. Modify internal parameters in AP HE_TB RX trigger based testing, and fix wrong pre packet gap of responding HE TB when AP sends trigger frame which packet length is larger than 1000us.
+       11. Install TFC library to delete all files in tester folder to prevent disk full by hugh waveform files. Now calling LP_GetVersion will delete all files in user waveform folder in tester.
+           The user waveform folder path can be queried by LP_GetInternalWaveformDirectory function and default is "/user/IQfactWfm/0" if no LP_Async_Init is called.
+       12. Implement new LP_IQxel_FastPer_Sweep_Ext function to accept multiple RF ports parameter from different VSGs and double frequency parameters.
+           Fast PER test among different VSGs can be only supported in IQxel-M series tester.
+
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.31 Release Note:  (2019-03-31)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxel-MW7G/IQxstream-5G(X)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxel-MW7G/ IQxstream-5G(X)
+
+       1. Support IQxel-MW7G tester. User can use LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+       
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.29 Release Note:  (2019-03-28)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW/IQxstream-5G(X)                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW/ IQxstream-5G(X)
+
+       1. Support IQxstream-5G(X) tester. User can use LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1) for 
+       2. Add implementation for LP_SetVsaSEQ, which uses sequence-based command to improve test time.
+       3.Fix LP_SetVsgCw doesn't set correct RF port after LP_SetTesterMode to switch to other rout.
+       4.PSDU bits for VHT packet will only be fetched when ANALYSIS_11AC_DECODE_PSDU flag is set.
+       5.[BT AnalyzeBluetooth] modified the case to check tester group for add command "CONF:ACP BW20M" if verify 2LE.(avoid some tester type is not cover)
+       6.Changing SCPI response buffer value to 16 MB to accomodate the response for long packets. When measuring EVM, we also fetch the EVM per symbol which causes failure with 4 MB buffer in case there are a lot of symbols.
+       7.Fix crash issue in WinXP. Those codes don't take effect in IQmeasure_SCPI.
+       8.Add support for MPS ACK Rx support in SequenceBuilder functions using keyword "ACKRX".
+       9.[11ax] Fix 11ax MPS MU test item run failures.
+       10.[IQmeasure_SCPI] added implement for setIsolationGapFile on crossTalkCheck_Unified class or the APT_SETTINGS(LP_Async_SetAPTSettings) would not effective to set APT isolation value.
+       11.Move the FFT result "y" and "Avg_y" into a separate function, which won't be called unless used.
+       12.Need to use 40MHz for IQxstream-M when doing BT test.
+       13.Implement buffer overrun crash in LP_Analyze80211ax function when number of analyzing segments is large. (EVM_NUMBER = 20).
+       14.Enable CDD mode for 11b waveform generation
+       15.Improve the "del_all.js" TFC library installation.
+         a. Get rid of the "tfc" option string.
+         b. IQmeasure automatically check whether the "del_all.js" has been installed before performing the folder waveform delete operation. If it's not installed, IQmeasure will perform the TFC library installation first.
+       16.Wavegen_OFDM: Support non-standard 1AC data rates in 11ac, like VHT20 MCS9 SS1 or SS2. only LDPC encoding can be used.
+       17.Fix the issue that Wave Load clears all path loss table attached to module ports.
+       18.Correct the naming of one parameter from "packetdectectionThr" to "packetDetectionThr".
+       19.[FIX] Stop fetching 11B DSSS constellation results to avoid SCPI driver crash.
+       20.[FEAT] Add preamble power max/min to power measurement results.
+       21.[MSE] Stop decode OFDM PSDU bits to 1) avoid fetching large size results 2) increase calc:txq time.
+       22.[FIX] Improve the 11B ramp up/down results.
+       23.Fix Fast sweep PER function by changing slash '//' to '/'.
+       24.Add tester version check in SetChannelOffsetPowerThreashold function.
+       
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.28 Release Note:  (2019-01-08)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Enabled per MPDU QOS setting in waveform generation.
+       2. Added a new function to install TFC library on tester, LP_InstallTFCLibrary().
+       3. Added keywords to fetch OFDM symbol based packet start/stop timing, "ofdmstartSeconds" and "ofdmstopSeconds".
+       4. Added support for CDD result retrieving using LP_GetScalarResult() and LP_GetVectorResult().
+            - Need to call LP_SetAnalysisParameterInteger("AnalyzeCDD", "TotalNumCDDSignal", numberOfCDDSignal) before the analysis function.
+            - Need to call LP_SetAnalysisParameterInteger("AnalyzeCDD", "SelectCDDSignal", CDDSignalIndex) before fetching each signal result. CDDSignalIndex starts from 1.
+        5. Fixed a memory leakage issue.
+        6. Add LP_GetInternalWaveformDirectory() function for user to get internal waveform directory.
+        7. Added a new parameter packetDetectionThr in SeqBuildParams structure. Default value should be set to 10. Setting this parameter is required.		
+        8. Added Freq offset for IQXEL80/160 Testers for BT capture and analysis.
+        9. Added BT Tx diversity mode support. 
+        10. Added IQxstream-5GX support.
+        11. Added a new function LP_Segms_AnalyzePowerRamp80211b() to support 11b ramp up/down measurements.
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.27 Release Note:  (2018-09-28)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+       f. IQxstream-5G
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. Optimize LP_WaveGen_OFDM() to apply degradation only when the degradation settings are non-zero.
+	   2. Add packet format analysis fetch
+	   3. PEER RSDB implementation.
+	   4. NOTE: /user/IQfactWfm/ will be the default folder for wavegen and wavefrom uploaded.
+	   5. Implement 11ax fetch of guard interval in second.
+	   6. Implement channel offset power threshold for side band EVM degrade issue.
+	   
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.26 Release Note:  (2018-08-09)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+       f. IQxstream-5G
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. CHANGED THE SEQBUILDPARAMS STRUCTURE TO ACCOMMODATE MORE GENERAL CASES.
+          - Moved the 11ax analysis configuration settings from the Analysis_11AX_Params structure to the root structure.
+          - Added 11n/11b configuration settings.
+       2. Make "PKT_AUTO" also works with trigger based testing by sending the HE-TRIG configuration commands when packet format is set to "PKT_AUTO".
+	   
+	   
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.25 Release Note:  (2018-07-05)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+       f. IQxstream-5G
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. Remove sending extra dummy packets before doing the UL OFDMA trigger based test.
+	   
+b. IQxstream-5G
+       1. Add support for IQxstream-5G.
+	   
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.24 Release Note:  (2018-06-06)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. LP_Async_InitTxRxHandler: modify the default value to 1 for new universal crosstalk method, the old APT method will be deprecated.
+       2. Fix a bug in socket driver for a corner case when response from the tester is "#10".
+       3. Improve LP_SetVsgNxN() to support 8x8.
+       4. Fixed the issue of save VSA signal crash for BW160.
+       5. Changed the max_evmAll and min_evmAll to be per stream result if using the new result fetching API.
+       6. Fixed a regression issue with "aver_evm_all_26tone_RU" result retrieving.
+
+	   
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.23 Release Note:  (2018-05-10)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. Implement setting CCK analysis frequency offset, for 20in40 CCK analysis. (Created LP_GetWaveformInfo)
+	   2. Implement getting waveform info from a external or internal waveform file. (Created LP_Set11bAnalysisFreqencyOffset)
+	   3. Implement setting 80M frequency segment for HE160 TB PPDU wavegen. (Modified LP_WaveGen_OFDM)
+	   4. Fix cannot setting multiple MPDU when MAC_Header_MPDU_State is MAC_HEADER_MPDU_ALL. (Modified LP_WaveGen_OFDM).
+	   5. Fix buffer overflow 4096 byte for MIMO 8x8 measurement.
+	   6. Configure the mask type to be 11ax and CBW accordingly for the HE-TRIG mask measurement.
+	   7. Add support for averaged spectral flatness measurements.
+	   8. Implement frequency correlation AUTO for LP_Analyze80211ag/n/ac/ax.
+	   9. Fix the package format to be AUTO for HE-TRIG packet analysis.
+	   10. Added support for CDD mode analysis parameter settings for Analyze80211ax.
+	   11. Implement symbol clock correlation method. We treat this method as advanced settings and Use LP_SetMode("symClockCorrMethod", 1) to enable time domain method.
+	   12. Fix an issue with "evm_all_26tone_RU" result retrieving.
+	   
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.22 Release Note:  (2018-04-16)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. For the spectrum result, make "x" and "y" per packet and "Aver_y" returns the average result over the analyzed packets.
+       2. Add the new return result "ackRespTime" to retrieve the HE-TRIG timing.
+       3. Make "round_trip_time" return per packet result.
+       4. Add a new function to analyze the general purpose RF signal power, LP_AnalyzeGPRFPower().
+
+***************************************************************************************************************************************************************************************************************************** 
+IQmeasure 3.1.3.21 Release Note:  (2018-04-03.)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+	   1. Fix the fast per issue with IQxel-MW.
+	   2. Add "aver_dcLeakageDbc", "aver_IQImbal_amplDb", "aver_IQImbal_phaseDeg" (per chain results.)
+	   3. [IQlite-594] fixed the issue on LP_Segms_AnalyzePower for MW doesn't use multi segments for wide band capture.
+	   4. Add LP_Async_RequestTX/RX wrapper to new APT interface LP_Async_RequestTXRX
+       5. Add support for setting TargetRSSI to 127 (MAX)
+       6. Add API LP_QueryRFCorrection to Query current RF correction for the specified port and frequency.
+       7. Changes to IQmeasure WiFi, BT and Zigbee analysis functions to send the :txq and :pow calculation commands outside the number of segments 'for' loop to save significant test time
+       8. Add IQmeasure SCPI to enable/disable PSDU decoding
+       9. Remove workaround of "WAVE:DEL:ALL" for UL OFDMA test, which load the waveform from the PC.
+       10. Implement wavegen with features A-MPDU enabled and AMPDU-EOF.
+	   11. Implement HE extend range packet format output (HE_ERAN_SU).
+	   12. Fix analysis failed after LP_LoadVsaSignalFile.
+
+*****************************************************************************************************************************************************************************************************************************       
+IQmeasure 3.1.3.20 Release Note:  (2018-02-22)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Fixed the issue of extra number of packet transmitted during the trigger based test.
+       2. Added support for preamble power measurement in trigger based test.
+	   
+*****************************************************************************************************************************************************************************************************************************       
+IQmeasure 3.1.3.19 Release Note:  (2018-02-08)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Fixed the VSG spike issue with the transmitted packet during the trigger based test.
+       2. Fixed the "startSeconds" and "stopSeconds" result retrieving issue.
+	   
+*****************************************************************************************************************************************************************************************************************************       
+IQmeasure 3.1.3.18 Release Note:  (2018-02-02)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Implement enabling all MCS on wavegen.
+	   2. Add log on LP_SelectCaptureRangeForAnalysis to record packetsOffset and packetsLength parameters.
+	   3. Fixed two crashes in fetching MPS results in IQmeasure.
+	   4. Applied the fix for JIRA IQXELMW-990 to avoid the VSG packet spike during MPS transmission.
+	   5. Add BT TX HDR analysis support.
+	   
+*****************************************************************************************************************************************************************************************************************************       
+IQmeasure 3.1.3.17 Release Note:  (2018-02-01)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Update LP_WaveGen_OFDM(): Set numOfExtraAnt(number of extra antenna) = 0 when MIMO license(0300-WLANM) is not installed in tester.
+	   2. Update APRX TBT test: Implement to handle 1 core trigger frame, 4 cores TB PPDU case.
+	   3. Fix LP_AnalyzeTechnologyFFT(), LP_AnalyzeVHT160Mask() error on IQxel-MW when analyzing BW160 FFT signal.
+	   4. Fix errors occurred on the APRX TBT test and then DL MU test. (AP-54, AP-55)
+	   5. Fix LP_WaveGen_OFDM(): ignore STBC and short GI settings for 11ag technology. Also handle HE_MF and HE_GF only on 11n technology.
+	   6. Add protection to prevent invalid segment_idx/signal_num/stream_num cause abnormal storage creation which will introduce memory access violation.
+	   7. Modify the sotrage_type and attribute of "spectralFlatnessHighLimit" and "spectralFlatnessLowLimit" to support multi_pkts scenario.
+	   8. OFDMA: Fix analysis error happened on testing APRX TBT and then DL HE_MU test.
+	   9. OFDMA: Fix crash happened on testing wide-band capture HE_MU signal, then APRX TBT test.
+	   10. Fix wavegen: tester respond error when setting short GI on 11ag..
+	   ADDITION NOTE: Analysis packet offset and packet length parameters will be re-set as 0 and 1 after running LP_VsaDataCapture(), LP_Segms_VsaDataCapture(), LP_LoadVsaSignalFile() functions.
+	   		See the calling sequence example:
+	   		LP_VsaDataCapture();
+	   		LP_SelectCaptureRangeForAnalysis(0, 0, 1, 2); // Set packet offset = 1, packet length = 2 on next analysis.
+	   		LP_Analyze80211ac();
+	   		LP_GetScalarMeasurement();
+	   		LP_SetVsa();
+	   		LP_VsaDataCapture(); <-- Reset packet offset = 0, packet length = 1 on next analysis.
+	   		LP_Analyze80211ac();
+	   
+
+IQmeasure 3.1.3.16 Release Note:  (2018-01-15)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added DCM support for 11ax HE-TRIG analysis, both in regular and trigger based test.
+	   2. For STA trigger based test, change the dummy packet power level to be the same as the normal packet.
+	   3. Fix a bug of applying the "numOfPacketToSkip" and "numOfPacketToAnalyze" in the trigger based test.
+       4. Added support for 80+80 waveform generation.
+	   5. Added support for configuring QOS/SEQ fields per MPDU in the WaveGen_OFDM function.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.15 Release Note:  (2017-11-22)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Fixed one crash issue when running TBT test 500 runs with different configurations.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.14 Release Note:  (2017-11-03)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Fixed one multi-packet result retrieving crash issue.
+       2. Update the AP trigger based test functionality.
+	     - LP_Meas_InitSeqBuilder("APRX");
+       3. Remove the hard-coded BT sampling rate.
+       4. Enable per-RU spatial mapping for the wavegen function.
+       5. Enable support for the unused tone error measurement averaging for trigger based test.
+       6. Added STBC and short guard interval support for OFDM waveform generation.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.13 Release Note:  (2017-09-29)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added 4 MAC address support for 11b waveform generation.
+         - Updated the function interface of LP_WaveGen_DSSS().
+       2. Added the per RU spatial mapping for the waveform generation.
+       3. Updated the ACK timing result retrieving mechanism to use the more accurate results.
+       4. Expanded the HE-TRIG packet length qualification for the trigger based test.
+       5. Added the average unused tone error measurement result over the packets, keyword "avg_evm_all_26tone_RU", 
+
+*****************************************************************************************************************************************************************************************************************************
+
+IQmeasure 3.1.3.12 Release Note:  (2017-08-11)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Add 11ac/ag/b/n wavegen support.
+         - Updated the function interface of LP_WaveGen_OFDM().
+         - Added a new function LP_WaveGen_DSSS().
+       2. Implement adding file timestamp as checksum for more precise file loaded check on SetVsgModulation function.
+       3. Fixed the TBT error when setting SeqBuildParams.ACKDelay = 35e-6.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.11 Release Note:  (2017-07-21)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Add per chain and per stream result reporting for "rmsPowerNoGap", "rxRmsPowerDb", "max_power", and "min_power".
+       2. Add sample frequency offset (SFO) compensation for waveform generation.
+       3. Add pre-packet and post-packet gap configuration for waveform generation.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.10 Release Note:  (2017-06-27)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Change the per RU power result reporting format; need to specify the stream_index and chain_index and then a vector result can be retrieved containing alll the RU powers.
+       2. Fixed the IQmeasure crash issue when fetching RU power with stream number of 1 and module number greater than 1.
+       3. Fixed crash issue with not supported DSSS:EVM:Method type on old tester FW.
+       4. Fixed the same Min and Max ACK timing issue for STA trigger based test.
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.9 Release Note:  (2017-06-09)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added support for AP trigger based test.
+         - LP_Meas_InitSeqBuilder("APRX")
+       2. Fix the IQmeasure crash issue when fetching RU power with stream number of 1 and module number greater than 1.
+       
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.8 Release Note:  (2017-06-02)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added support for multi-user HE-TRIG and HE-MU with trigger frame waveform generation.
+       2. Added support for per packet PSDU CRC error result retrieving; used for Tx PER test.
+       3. Added support for UL PPDU generation with per RU spatial mapping.
+       4. Added support for configuring the MAC header per MPDU for a single user.
+       5. Added support for generating UL HE-TRIG PPDU based on trigger frame settings.
+       6. Added support for generating trigger frame with aggregated data frame.
+       7. Added support for generating UL HE-TRIG PPDU with different impairment between users, including timing, power, CFO, SFO.
+       8. Added wavegen support to generate DL MU waveforms with trigger info in mac header for UL MU response scheduling.
+       9. Added results reporting for HE-SIG-A and HE-SIG-B.
+       10. Updated 80211b EVM calculation standard to 2016 standard.
+	   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.7 Release Note:  (2017-04-13)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Fixed one measurement results retrieving issue for STA TBT.
+	   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.6 Release Note:  (2017-04-07)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Updated the waveform generation function. Please be noted that the input parameters have been changed to better handle the new packet type.
+
+         - LP_WaveGen_OFDM();
+			  
+       2. Added support to query A-Factor and PED by keywords "afactor" and "packet_extension_duration".
+       3. Add support to query the ACK count using the keyword "ack_count".
+       4. The enum definition of "GILTF_AX" has been changed to be more intuitive per the spec.
+	   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.5 Release Note:  (2017-2-10)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added one function for waveform generation.
+
+         - LP_WaveGen_OFDM();
+			  
+       2. Fixed the memory leakage issue.
+	   3. Fixed the issue of not being able to get the power values when numOfSelectedModules = 2 in SU SISO cases.
+       4. Fixed the issue with HE trig based analysis seq builder API.
+	   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.2 Release Note:  (2017-1-13)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added demo code for 11ax SU/MU/Trigger based testing. The demo code can be found at \DemoCode\IQmeasureTest.cpp at the IQmeasure installation folder. 
+	   
+         - Some new APIs are added
+              - WiFi_11ax_Loopback();
+              - WiFi_11ax_TriggerBasedTesting();
+			  
+       2. Make LP_GetScalarResult() and LP_GetVectorResult() support the legacy technology analyses, including 11ac/a/b/g/n, power, FFT, and BT analysis results.
+
+   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3.1 Release Note:  (2016-12-16)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added support for 11ax trigger based testing.
+
+         - Some new APIs are added
+              - LP_Meas_InitSeqBuilder();
+              - LP_Meas_SetSeqinputParams();
+              - LP_Meas_BuildAndExecute();
+			  - LP_Meas_CheckSeqStatus();
+
+   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.3 Release Note:  (2016-12-08)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel-MW
+
+       1. Added support for 11ax SU and MU signal analysis and result fetching.
+
+         - Some new APIs are added
+              - LP_Analyze80211ax();
+              - LP_GetScalarResult();
+              - LP_GetVectorResult();
+
+   
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.2 Release Note:  (2016-07-11)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+a. IQxel
+
+        1. Fixed an InitTester issue when lacking "ALLPORTS" license which only supports 3 modules on an IQxel-M16.
+	
+	2. Added support for per stream result fetching for "symClockErrorPpm", "evmData", and "evmPilot".
+	
+	3. Added support for per segment result fetching for "evmAvgAll".
+	
+	4. Added support for wideband capture and analysis on IQxel-MW in LP_VsaDataCapture(), LP_GetScalarMeasurement(), and LP_GetVectorMeasurement() functions.
+	
+	5. Added support for number of packets "numPackets" result fetching for WiFi power measurement.
+	
+	6. Added support for configuring analyze frequency segments for 80+80 signals.
+	
+	  - Usage: LP_SetAnalysisParameterIntegerArray(), keyword is "analyzedFreqSegments".
+	  
+	7. Fixed an issue in LP_IQBeam_SetMode() to get the correct module name for IQbeam to enable APT testing.
+	
+	8. Fixed an issue in LP_SetVsgModulation() to avoid reload existing iqvsg file in memory.
+	
+	9. Added support for fetching "pkPower" and "rmsPower" for streams 2 and above in MIMO setup.
+	
+	10. Added support for CW power measurement using LP_Segms_AnalyzeGPRFPowerbyFFT().
+	
+	11. Fixed a bug in LP_SetVsgModulation_MultiWaves() when "modFileName" is larger than 64 bytes.
+	
+	12. Added support for "evmPkt" result fetching.
+    
+
+*****************************************************************************************************************************************************************************************************************************
+IQmeasure 3.1.1 Release Note:  (2016-01-18)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M/IQxel-MW                                               
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   (IQapi  1.9.0.5)
+       c. IQnfc/IQnfc+
+       d. IQlink (FW 1.7.0)
+       e. zSeries
+	   
+PLEASE NOTE THAT IQMEASURE_IQAPI_SCPI WILL NOT BE SUPPORTED!! IF USING SCPI BASED TESTERS, YOU HAVE TO CALL LP_Init(int IQtype = IQTYPE_XEL,int testerControlMethod = 1).
+
+General:
+
+    1. Added multi-thread support for IQmeasure.
+      Usage:
+	    - By default the multi-thread feature is turned off; if running IQmeasure in multiple threads, all the IQmeasure copies will share the same internal memory.
+	    - If independent IQmeasure run is needed in different threads, please call LP_SetConcurrency() in Addeditional threads before calling any other IQmeasure functions. 
+		
+    2. Added IQmeasure_DemoCode folder in the package. Demo codes for most of the up-to-date technologies are covered in the IQmeasureTest.cpp source file. The package can be built independently and an exectutable will be generated in the \Bin folder to run the demo code.
+
+a. IQxel
+
+    1. Added Factory EFFeciency (FEFF) module support.
+      - LP_AutoPLCalibration();
+	  - LP_AutoPLCalibration_FourPoint();
+	  - LP_FixtureHealthCheckRef();
+	  - LP_FixtureHealthCheckTest();
+	  - LP_DUTSense();
+	  - LP_UpdateOSLCali();
+	  - LP_ReturnLossTesterPort();
+	  - LP_ReturnLossFixtureRFProbe();
+	  
+    2. Added IQxel-M8W and IQxel-M16W support.
+    
+	3. Added WiSUN support.
+      - LP_WiSUN_FSK_SetSFDType(); 
+      - LP_AnalyzeWiSUN();
+    
+	4. Added ZWave support.
+      - LP_AnalyzeTechnologyPower();
+	  - LP_AnalyzeZwave();
+    
+	5. Added GPS ScenarioMode for IQxel-M8; change LP_GPS_ModulationMode(), LP_COMPASS_ModulationMode(), LP_Glonass_ModulationMode() interfaces. The main purpose to have multi satellite support.
+      - LP_GPS_IQXEL_LoadScenarioFile();
+      - LP_GPS_IQXEL_PlayScenarioFile();
+      - LP_GPS_ModulationMode();
+	
+    6. Two functions are updated to support 8x8 channel estimation with the CSD removal algorithm.
+      - LP_GetVectorChannelEst();
+      - LP_Segms_GetVectorChannelEst();
+    
+	7. Support LE TX advertisement packet analysis, specified in analysis_type in LP_AnalyzeBluetooth(), options are "LE_Adv_Ch37", "LE_Adv_Ch38", "LE_Adv_Ch39".
+    
+	8. Update LP_SetAnalysisParameterInteger() to support ULB, with keyword "clockRate" and TXQUALITY_CLOCK_RATE enum.
+    
+	9. Determine the full pathname to the implementation DLL and to dynamically load it using the full pathname.  This is to support the scenario when IQmeasure needs to be loaded from an alternate path.	
+    
+	10. Added two more keywords "margin" and "mask_limit" for Zigbee.
+    
+	11. Added a new IQmeasure function for Segment analysis for 11p.
+      - LP_Segms_Analyze80211p()
+    
+	12. Addeding support for capturing a single stream while working in MIMO configuration in order to get CW analysis (which is only supported on a single stream).
+      - LP_VsaDataCaptureSingleMimoStream();
+
+	13. Implemented 20in80 or 40in80 MASK wide capture LP_VsaDataCapture().
+      - Note: IEEE spec states for 20/40in80, MASK should BW80 template, SPECTRUM should use BW20/40 limits.
+
+    14. Update LP_GetTesterTypeMimoConfig() to dynamically get TesterTypeMimoConfig flag for composite and mimo test.
+
+	15. Added EVM per signal analysis support in LP_Analyze80211ac() and LP_Analyze80211n().
+      - Usage: "evms" for the input parameter "mode"
+
+	16. Added a new function LP_AnalyzeGPRFSpectrum(0 to perform FFT analysis on GPRF signals.
+
+	17. Support BT frequency deviation inquiry mode with analysis_type "IDPacket"; Added a new result with keyword "chanIndexDetect".
+
+	18. Added one more result for LE pk-to-pk freq dev with keyword "leFreqDevPktoPk".
+
+	19. Added support for 300K frequency deviation (BT connection mode and LE connection mode), with analysis_type "LE_Connection".
+
+	20. Added a new result "numPackets" for power analysis.
+
+	21. Added signal level based trigger to LP_VsaDataCapture() function; need to set triggerType = 16.
+
+	22. Added a new function LP_UploadBinaryFile() to upload binary data to IQxel tester.
+
+	23. Added multiple functions for zSeries tester support.
+      - LP_ConfigureSMU_Voltage();
+      - LP_AnalyzeGPRFPowerbyFFT();
+      - LP_SMUCapture();
+      - LP_SetSsbiGenerator();
+      - LP_SSBI_Query();
+      - LP_SetRefGenerator();
+      - LP_SetPatternFile();
+      - LP_GetReadingSaveToFile();
+
+	24. Update LP_GetSampleData() and LP_SaveVsaSignalFileText() to support only one module used.
+	  
+    25. Added handling for scpi return code 1 and 11 for limit failure to make sure the function returns results even if limit failure happens.
+	
+    26. Fix memory corruption bugs in LP_GetVectorChannelEst() and LP_Segms_GetVectorChannelEst() for the case that input array size is smaller than the returning results size.
+	
+    27. Fix a bug in LP_SetVsgCwNxN() to support M16 Bank C/D.
+	
+    28. Fix a bug in LP_InitTester() when the tester is reset and run the function for the first time it will fail.
+		
+
+c. IQnfc
+
+    1. Support IQnfc+ for current IQmeasure NFC functions; Added one more function LP_NFC_PowerTransferMeasurement() to perform power transfer measurement.
+
+
+d. IQlink
+
+    1. Add IQlink support.
+      - LP_IQLINK_Associate();
+      - LP_IQLINK_Disassociate();
+	  - LP_IQLINK_Connect_Socket_Server();
+	  - LP_IQLINK_EnableRfPort();
+      - LP_IQLINK_SetTcp();
+      - LP_IQLINK_SetUdp();
+      - LP_IQLINK_SetAp();
+      - LP_IQLINK_Uplink_Throughput_Start();
+      - LP_IQLINK_Downlink_Throughput_Start();
+	  - LP_IQLINK_Tx_Power_Run();
+	  - LP_IQLINK_Rx_Per_Init();
+      - LP_IQLINK_PER_Start();
+      - LP_IQLINK_PER_Stop();
+	  - LP_IQLINK_OverwriteRxPerSettings();
+	  - LP_IQLINK_SetPathLossTable();
+	  - LP_IQLINK_SetIperf();
+	  - LP_IQLINK_GetSSID();
+	  - LP_IQLINK_SetDutApRole();
+	  - LP_IQLINK_CheckDutConnection();
+
+************************************************************************************************************
+
+
+IQmeasure 3.1.0 Release Note:  (2015-03-30)
+
+Supports five types of testers
+
+       a. IQxel/IQxel-M                                               
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   (IQapi  1.9.0.5)
+       c. IQnfc (FW 1.4.0 - 1.8.0)
+       d. IQlink (FW 1.2.0)
+       e. ZSeries
+
+1. IQxel
+
+      - IQmeasure_SCPI  
+	  
+	(1) Add two new functions LP_InitTesterN() and LP_SetTesterMode(); These will be the primary functions for connecting tester in the future to replace LP_InitTester()/LP_InitTester2()/LP_InitTester3()/LP_InitTester4().
+              
+              Usage:  LP_InitTesterN("TesterIP1,TesterIP2,TesterIP3", 3); //Use three IQxel80 testers to do 3x3 MIMO test
+                      LP_SetTesterMode(UP_TO_80MHZ_SIGNAL, {1,2,3}, 3);
+
+                      LP_InitTesterN("TesterIP1", 1); //Use one IQxel-M16 tester to do 3x3 MIMO test
+                      LP_SetTesterMode(UP_TO_80MHZ_SIGNAL, {1,2,3}, 3);
+
+                      LP_InitTesterN("TesterIP1", 1); //Use one IQxel160 tester to do 80+80MHz test
+                      LP_SetTesterMode(NON_CONT_80_80MHZ_SIGNAL, {1,2}, 2);
+
+        (2) Add a new function LP_GetTesterAttribute() to get the tester attribute; currently the following keywords are supported: "isIQxelLegacy", "isIQxelMseries", "isIQxelM8series", "isIQxelM16series".
+		
+        (3) Add two new functions LP_TransmitCw() and LP_TransmitCwNxN() to transmit CW waves without clearing the loaded waveforms; in this case the VSA/VSG frequency is aligned with the CW frequency.
+
+        (4) Add per antenna results for "PhaseNoiseDeg_RmsAll", "freqErrorHz", and "symClockErrorPpm".
+
+        (5) Add two more functions to support IQBeam.
+
+              - LP_IQBeam_CheckStatus();
+              - LP_IQBeam_SetMode();
+
+        (6) Add a new function LP_Segms_VsaDataCaptureAndBTAnalysis() to do multiple captures on a BT signal, store them into multiple segments, and analyze the packets according to the Data Rate pattern.
+
+        (7) Add a new function LP_QueryPreviousOperationStatus() to wait and query for the previous operations to be finished.
+
+        (8) Add maximum results of BT including the following
+
+               - "max_freq_est", "max_freq_estHeader", "max_freq_drift", "max_freq_deviation", "max_freq_deviationpktopk", "max_deltaF2AvAccess", "max_deltaF2MaxAccess", "max_deltaF1Average", "max_deltaF2Average", "max_deltaF2Max", "max_maxfreqDriftRate", "max_payloadErrors"
+               - "max_EdrEVMAv", "max_EdrEVMpk", "max_EdrprobEVM99pass, "max_EdrOmegaI", "max_freq_estHeader", "max_EdrFreqExtremeEdronly", "max_EdrExtremeOmega0", "max_EdrExtremeOmegaI0", "max_EdrPowDiffdB", "max_freq_est", "max_freq_deviation", "max_freq_deviationpktopk", "max_deltaF2AvAccess", "max_deltaF2MaxAccess"
+
+        (9) Add a new function LP_IQXEL160_InitTester4() for 160MHz 4x4 MIMO.
+
+        (10) Add results for "HTSigCRC","VHTSigAFieldCRC","vhtSigAFieldCRC", "HTSigA2ShortGI", and "htSigA2ShortGI".
+
+        (11) Add a new function LP_Segms_AnalyzeTechnologyFFT().
+
+        (12) Add results for "evmData" and "evmPilot".
+
+        (13) Add a new function LP_DisconnectRemoteTester() to release slave testers after the measurement is finished.
+
+        (14) Add a new function LP_SetSocketPort() to select port number when establishing TCP/IP connection with the tester.
+
+        (15) Add 802.11ah support by the new function LP_Analyze80211ah().
+
+        (16) Add a new function LP_SetVsaVsg_SamePort() to set VSA and VSG to the same port.
+
+        (17) Add a new function LP_SetMarkerTrigger() to output the trigger signal for a specific VSA/VSG event.
+
+        (18) To support new cross talk check mechanism, revise the APT function interface of LP_Async_InitTxRxHandler() and LP_Async_InitTxRxHandler(), and add two new functions LP_Async_Initialize() and LP_Async_RequestTXRX().
+
+		
+
+2. IQnfc
+
+     - IQmeasure_SCPI
+
+       (1) Change the function interfaces of LP_NFC_Setup_InitiatorWaveformAnalysis() and LP_NFC_Setup_TargetWaveformAnalysis() to add one more parameter to select analyzer unit.
+       (2) Remove one input argument for "Mod Depth" from LP_NFC_Setup_InitiatorWaveformAnalysis().
+
+
+
+3. IQlink
+
+     - IQmeasure_SCPI
+
+       (1) Add IQlink support.
+		
+            List of added functions:
+
+                 - LP_IQLINK_Associate();
+                 - LP_IQLINK_Disassociate();
+                 - LP_IQLINK_SetTcp();
+                 - LP_IQLINK_SetUdp();
+                 - LP_IQLINK_SetAp();
+                 - LP_IQLINK_Uplink_Throughput_Start();
+                 - LP_IQLINK_Downlink_Throughput_Start();
+                 - LP_IQLINK_PER_Prepare();
+                 - LP_IQLINK_PER_Start();
+                 - LP_IQLINK_PER_Stop();
+
+
+************************************************************************************************************
+IQmeasure 3.0.10 Release Note:  (2014-09-19)
+
+Supports three types of testers
+
+       a. IQxel/IQxel-M                           IQapis 2.0.14.1                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.9.0.5
+       c. IQnfc (FW 1.4.0 - 1.6.0)
+
+1. IQxel
+
+      - IQmeausre_IQapi_SCPI
+
+       Known issue:
+
+        (1) 4x4 MIMO with one IQxel280/160 plus two IQxel80s is not supported.
+
+      
+      - IQmeasure_SCPI  
+	  
+
+        (1) Add a new function LP_SaveFileToLocal() to save the file on tester to local PC.
+
+	(2) Add a new function LP_checkDllLoaded() to check whether the underlying IQmeasure DLLs are loaded correctly.
+
+        (3) Add a new function LP_LockTesterDebug() to lock the tester for debug purpose.
+
+        (4) Add a new function LP_IQXEL_GetTesterType() to get the tester type for IQxel variants as listed in the IQTESTER_TYPE enum.
+
+        (5) Update LP_Async_RequestTX() and LP_Async_RequestRX() to include ACK power check.
+
+        (6) Add a new function LP_Segms_GetVectorChannelEst() to get the vector channel estimation matrix.
+
+        (7) Add FM support for IQxel-M6.
+
+              List of updated functions:
+                
+                LP_FM_SetVsg();
+                LP_FM_SetAudioSingleTone();
+                LP_FM_DeleteAudioTones();
+                LP_FM_StartVsg();
+                LP_FM_StopVsg();
+
+        (8) Add IQXEL-M16 support for 3x3 and 4x4 true MIMO.
+
+        (9) Add preamble power analysis support for WiFi, preamble time period for power analysis is specified by LP_SelectCaptureRangeForPreamPowerAnalysis().
+
+        (10) Add a new function LP_SetPathLossTable() to set path loss table for different ports.
+
+        (11) Add support for IQair.
+
+              List of added functions:
+                
+                LP_ChamberCal();
+                LP_ChamberCalLoadPathLoss();
+      
+       Known issue:
+
+         (1) 4x4 MIMO with one IQxel280/160 plus two IQxel80s is not supported.
+         (2) LP_IQXEL_FastPer_Sweep() fails for VHT data rates on IQxel80; fails on IQxel-M for port 2, 3, 4.
+		
+
+3. IQnfc
+
+     - IQmeasure_SCPI
+
+       (1) Add a new function LP_NFC_CheckCoilType() to tell whether the coil is a Litepoint(LP) or NONLP coil.
+       (2) Add support for NONLP coil measurement.
+       (3) Add a new function LP_NFC_SetTRxCommandType() to set NFC transceiver command type.
+       (4) Change the LP_NFC_FreqSweep() interface to include conducted frequency sweep measurement.
+       (5) Change the LP_NFC_SetupInitiatorWaveformAnalysis() to include two ways of tuning the target response level.
+
+************************************************************************************************************
+IQmeasure 3.0.9 Release Note:  (2014-06-06)
+
+Supports three types of testers
+
+       a. IQxel/IQxel-M                           IQapis 2.0.13.3                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.9.0.5
+       c. IQnfc (FW 1.4.0)
+
+1. IQxel
+
+      - IQmeausre_IQapi_SCPI
+
+        (1) Add "spectrumMarginDb" and "spectrumMarginOffsetFreqHz" for VHT80 Mask analysis.
+
+        (2) Add "maxFreqErr" for 11b analysis.
+		
+        (3) Add support for non-blocking capture in LP_VsaDataCapture().
+		
+	(4) Add function to support multiple captures and averaged Power analysis; It makes multiple captures and returns average, maximum and minimum Power calculated over multiple captures.
+		
+	       LP_IQXEL_MultiCapturePowerAver();
+			   
+	(5) Add LP_GetIQVersion() to get the version information and put them in a structure IQ_VERSION.
+		
+	(6) Add support to set the communication socket alive time in case the application program crashes or ethernet connection is lost.
+		
+	       LP_DualHead_SetSocketAliveTime();
+			   
+	(7) Add support for 3x3 MIMO with one IQxel280 plus one IQxel80.
+		
+	       Note:	Current version only supports IQxel280 to be the master tester.
+	       Usage:	LP_InitTester3(ipAddr1, ipAddr1, ipAddr2)
+			   
+	(8) Add support for slave VSA trigger in MIMO setup.
+		
+	       Note:	FW1.13.0 only supports IQxel280/160 slave video trigger and FW1.12.1 supports both multi-IQxel80 and IQxel280/160 slave video trigger.
+	       Usage:	LP_VsaDataCapture();
+			LP_SetAnalysisParameterIntegerArray("Analyze80211ac", "prefOrderSignals", [2,1], 2);
+	                LP_SetAnalysisParameterIntegerArray("Analyze80211ac", "powerDetectionSignals", [2], 1);
+			LP_Analyze80211ac();
+
+       Known issue:
+
+        (1) 4x4 MIMO with one IQxel280/160 plus two IQxel80s is not supported.
+
+      
+      - IQmeasure_SCPI  
+	  
+
+        (1) Add GPS/COMPASS/Glonass support.
+              
+              List of added functions:
+                
+                LP_GPS_ModulationMode();
+		LP_GPS_ModulatedMode();
+		LP_COMPASS_SetActivate();
+                LP_COMPASS_SetDeactivate();
+                LP_COMPASS_ContinueWave();
+		LP_COMPASS_ModulationMode();
+		LP_Glonass_SetActivate();
+		LP_Glonass_SetDeactivate();
+		LP_Glonass_ContinueWave();
+		LP_Glonass_ModulationMode();
+		LP_Glonass_SetFrequency();
+		LP_Glonass_SetOperationMode();
+		LP_Glonass_SetPower();
+		LP_Glonass_SetRfOutput();
+	  
+         (2) Add Load Sense support on IQxel-M.
+		
+		LP_IQXEL_LoadSense_SetRef();
+		LP_IQXEL_LoadSense();
+		
+	 (3) Add support to connect multiple ports to VSG at the same time on IQxel-M for parallel RX testing.
+		
+	        LP_SetVsg_MultiPort();
+         
+         (4) Add support for non-blocking capture in LP_VsaDataCapture().
+		
+	 (5) Add function to support multiple captures and averaged Power analysis; It makes multiple captures and returns average, maximum and minimum Power calculated over multiple captures. 
+		
+		LP_IQXEL_MultiCapturePowerAver();
+			   
+	 (6) Add LP_GetIQVersion() to get the version information and put them in a structure IQ_VERSION.
+		
+         (7) Add support to set the communication socket alive time in case the application program crashes or ethernet connection is lost.
+		
+	        LP_DualHead_SetSocketAliveTime();
+			   
+	 (8) Add support for DualHead token reset
+		
+	        LP_DualHead_TokenReset();
+			   
+	 (9) Add support to set MIMO VSG to transmit CW signals
+		
+		LP_SetVsgCwNxN();
+			   
+	 (10) Add support to set VSG power only without turning off the VSG.
+		
+	        LP_SetVsg_PowerLevel();
+				
+	 (11) Add support to configure VSA and VSG trigger settings
+		      
+	        LP_SetVsa_Trigger();
+		LP_SetVsg_Trigger();
+				 
+	 (12) Remove dependency of IQ2010Ext.lib in IQmeasure_SCPI
+		
+	 (13) Add sync waiting function to support parallel RX test in APT solution
+		
+	        LP_SyncWaitForNumSessions();
+			   
+	 (14) Add support for 3x3 MIMO with one IQxel280 plus one IQxel80.
+		
+	        Note:	Current version only supports IQxel280 to be the master tester.
+	        Usage:	LP_InitTester3(ipAddr1, ipAddr1, ipAddr2)
+			   
+	 (15) Add support for slave VSA trigger in MIMO setup.
+		
+	        Note:	FW1.13.0 only supports IQ280/160 slave video trigger and FW1.12.1 supports both multi-IQxel80 and IQxel280/160 slave video trigger.
+	        Usage:	LP_VsaDataCapture();
+			LP_SetAnalysisParameterIntegerArray("Analyze80211ac", "prefOrderSignals", [2,1], 2);
+	                LP_SetAnalysisParameterIntegerArray("Analyze80211ac", "powerDetectionSignals", [2], 1);
+			LP_Analyze80211ac();
+      
+       Known issue:
+
+         (1) 4x4 MIMO with one IQxel280/160 plus two IQxel80s is not supported.
+		
+2. IQ2010
+
+      (1) Add LP_GetIQVersion() to get the version information and put them in a structure IQ_VERSION.
+
+3. IQnfc
+
+     - IQmeasure_SCPI
+
+       (1) Add NFC support.
+		
+            List of added functions:
+
+                LP_NFC_FreqSweepCal();
+                LP_NFC_SaveCalRefFile();
+                LP_NFC_LoadCalRefFile();
+                LP_NFC_FreqSweep();
+                LP_NFC_Setup_InitiatorWaveformAnalysis();
+                LP_NFC_Setup_TargetWaveformAnalysis();
+                LP_NFC_InitProtocolCapture();
+                LP_NFC_InitCapture();
+                LP_NFC_AnalyzeSignal();
+				
+             Usage:    LP_Init(IQTYPE_NFC, 1);
+                       LP_InitTester(ipAddress);
+		       LP_NFC_Setup_TargetWaveformAnalysis();
+		       LP_NFC_InitProtocolCapture();
+		       LP_NFC_AnalyzeSignal();
+
+************************************************************************************************************
+IQmeasure 3.0.8 Release Note:  (2013-10-11)
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.11.1 )               IQapis 2.0.11.6                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.9.0
+
+1. IQxel
+
+      - IQmeausre_IQapi_SCPI 
+
+       Known issue:
+
+        (1) 3x3 MIMO with one IQxel280 plus one IQxel80 is not supported.
+       
+        (2) LP_IQXEL_MultiCaptureEVMAver() function does not support DSSS.
+
+      
+      - IQmeasure_SCPI  
+	  
+        (1) Add Asynchronous Parallel Testing (APT) support.
+		
+	      List of added functions:
+
+                LP_Async_Init();
+                LP_Async_Term();
+                LP_Async_InitTxRxHandler();
+                LP_Async_GetTesterLock();
+                LP_Async_ReleaseTesterLock();
+                LP_Async_RequestTX();
+                LP_Async_ReleaseTX();
+                LP_Async_RequestRX();
+                LP_Async_ReleaseRX();
+                LP_Async_GetIsTesterLock();
+                LP_Async_GetIsReqTXLock();
+                LP_Async_GetIsReqRXLock();
+                LP_Segms_VsaDataCapture();
+                LP_Segms_Analyze80211ac();
+                LP_Segms_Analyze80211ag();
+                LP_Segms_Analyze80211n();
+                LP_Segms_Analyze80211b();
+                LP_Segms_AnalyzePower();
+                LP_Segms_AnalyzeFFT();
+                LP_Segms_AnalyzeHT40Mask();
+                LP_Segms_AnalyzeVHT80Mask();
+                LP_Segms_AnalyzeBluetooth();
+                LP_Segms_GetScalarMeasurement();
+                LP_Segms_GetVectorMeasurement();
+                LP_Segms_SaveVsaSignalFile();
+                LP_Async_PrintTimeStamp();
+                LP_Async_printErrAll();            
+
+        (2) Add Zigbee and DECT support.
+              
+              List of added functions:
+                
+                LP_SetVsaDECT();
+                LP_AnalyzeDECT();
+                LP_AnalyzeZigbee();
+	  
+        (3) Add partial GPS support.
+
+              List of added functions:
+                
+                LP_GPS_SetActivate();
+                LP_GPS_SetDeactivate();
+                LP_GPS_ContinueWave();
+         
+        (4) Add LP_GetVectorChannelEst() for beamforming cal.
+
+        (5) Add LP_IQXEL_MeasureSpur() for frequency sweep to find potential spur.
+      
+       Known issue:
+
+        (1) LP_SetAnalysisParameterInteger() and LP_SetAnalysisParameterIntegerArray() is not functional.
+
+************************************************************************************************************
+IQmeasure 3.0.7 Release Note:  (2013-09-10)
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.11.1 )               IQapis 2.0.11.6                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.9.0
+
+1. IQxel 
+
+      (1) Update function LP_InitTester3() to support 3x3 MIMO with one IQxel160 plus one IQxel80.
+	  
+		Note:	Current version only supports IQxel160 to be the master tester.
+		Usage:	LP_InitTester3(ipAddr1, ipAddr1, ipAddr2)
+	  
+      (2) Update function LP_VsaDataCapture() to support 160MHz wideband capture.
+		
+		Usage:	Specify the input parameter ht40Mode to be 7
+
+      (3) Update LP_SetAnalysisParameterInteger() to support frequency segment selection when doing txq analysis in 80+80 non-contiguous mode.
+
+		Usage:	LP_SetAnalysisParameterInteger("Analyze80211ac", "frequencySegment", 0)
+				The last input argument enum:
+					enum IQV_ANALYZED_FREQUENCY_SEGMENT_TYPE
+					{
+						IQV_ANALYZED_FREQUENCY_SEGMENT_1,
+						IQV_ANALYZED_FREQUENCY_SEGMENT_2,
+						IQV_ANALYZED_FREQUENCY_SEGMENT_ALL
+					};
+	  
+      (4) Remove LP_IQXEL_Fast_Per(), using LP_IQXEL_FastPer_Sweep() instead.
+	  
+      (5) Add LP_DualHead_SetSocketAliveTime() to set the communication socket alive time in case the application program crashes or ethernet connection is lost.
+
+  Known issue:
+
+      (1) 3x3 MIMO with one IQxel280 plus one IQxel80 is not supported.
+      
+      (2) LP_IQXEL_MultiCaptureEVMAver() function does not support DSSS.
+
+2. IQ2010
+
+      (1) Add scalar result "loLeakageDb" for LP_Analyze80211b()
+	  
+************************************************************************************************************
+IQmeasure 3.0.6 Release Note:  (2013-05-28)
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.10.0 )               IQapis 2.0.10.6                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.88
+
+1. IQxel 
+
+      (1) Add function to support dual head individually on ROUT1 and ROUT2 for IQxel160/IQxel280
+		
+		IQMEASURE_API int		LP_IQXEL160_DualHead_ConOpen()
+	  
+	  Usage:
+               
+		LP_IQXEL160_DualHead_ConOpen();
+		LP_DualHead_ObtainControl();
+		LP_DualHead_ReleaseControl();
+		LP_DualHead_ConClose();
+
+      (2) Able to specify the VSA sampling rate (previously it was forced to set as 160Mhz)
+
+		IQMEASURE_API int 		LP_VsaDataCapture()
+		
+
+      (3) Add vector result ""spectrumHighLimit" and "spectrumAverHighLimit" for LP_AnalyzeTechnologyFFT()
+
+      (4) update function LP_IQXEL_MultiCaptureEVMAver to support ROUT2. The function is not compatible with previous firmwares.
+
+      (5) update function LP_IQXEL_FastPer_Sweep to support ROUT2. The function is not compatible with previous firmwares. 
+
+      (6) Add function LP_DualHead_TokenReset() to reset token in case of dead lock happens   
+
+  Known issue:
+
+      (1) IQxel160 160Mhz wide band capture and spectrum analysis is not supported.
+      
+      (2) LP_IQXEL_MultiCaptureEVMAver() function does not support DSSS.
+
+2. IQ2010
+	
+      (1) Add function LP_DualHead_TokenReset() to reset token in case of dead lock happens 
+
+      (2) LP_AnalyzeFFT function change the default window type as "blackmanharris", number of FFT bin will be 2048 (previously it was 4096)
+		
+************************************************************************************************************
+IQmeasure 3.0.5 Release Note:  (2013-04-06)
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.9.0 )                IQapis 2.0.7.12                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.83.20
+
+1. IQxel 
+
+      (1) Add function to support multiple captures and averaged EVM analysis; It makes multiple captures and returns average, maximum and minimum EVM calculated over multiple captures
+	
+		IQMEASURE_API int LP_IQXEL_MultiCaptureEVMAver(char *Mode, double SamplingTime, unsigned int CaptureCount, unsigned int SkipCount, double *EVMValues)
+	
+	  Usage:
+		LP_init()
+		LP_initTester()
+		LP_GetVersion()
+		LP_SetVsa()
+		<<Set DUT transmitting>>
+		LP_IQXEL_MultiCaptureEVMAver()
+		
+    
+      (2) Add function to support RX FastPER sweep test; It measures number of ACK returned at different power levels
+
+		IQMEASURE_API int LP_IQXEL_FastPer_Sweep(unsigned int Port,  int FreqMHz, unsigned int VsgTransmittPtkCnt, double VsgPowerStartLevel,    								                        double VsgPowerStopLevel, double PowerStep, char *pcWaveFileName, unsigned int *AckNumReturn, unsigned int *AckArraysize)
+	
+	  Usage:
+		LP_init()
+		LP_initTester()
+		LP_GetVersion()
+		<<Set DUT Receiving>>
+		LP_IQXEL_FastPer_Sweep()
+
+
+      (3) Enable IQxel160 80Mhz MIMO mode 
+
+	    (a) Signle IQxel160 2x2 80Mhz MIMO mode:
+
+		 IQMEASURE_API int	LP_InitTester2(char *ipAddress1, char *ipAddress2,int IQxelConnectionType = 0)
+
+ 	    (b) Double IQxel160 4x4 80Mhz MIMO mode:
+
+                  IQMEASURE_API int	LP_InitTester4(char *ipAddress1, char *ipAddress2, char *ipAddress3, char *ipAddress4);
+		
+		when ipAddress1= ipAddress2 = IP address of IQxel160 master; ipAddress3= ipAddress4 = IP address of IQxel160 slave 
+
+      (4) Add function to send SCPI command followed by binary
+
+	    IQMEASURE_API int	LP_ScpiCommandSetInBinary(char *scpiCommand, unsigned int binary_data_size, char* binary_data); 
+
+      (5) Enable function to normalize capture and save as .iqvsg  
+
+	    IQMEASURE_API int	LP_SaveVsaGeneratorFile(char *modFileName);
+
+      (6) Add function to FFT analyze and apply technology (11a/b/g/n/ac) specified spectrum mask limit
+	
+       	    IQMEASURE_API int	LP_AnalyzeTechnologyFFT(int technology...);
+  	    
+      (7) Enable argument "extAttndB" in function 
+
+	    IQMEASURE_API int LP_SetVsa(..double rfAmplDb.... double extAttenDb...)
+
+	    rfAmplDb is set as VSA reference level (not DUT output level); When extAttenDb does not equal to zero, measured result will be compensated; 
+
+
+      (8) Add a function for IQxel160 to set VSA/VSG seperation for 80Mhz + 80Mhz mode
+
+	    IQMEASURE_API int		LP_SetVsaVsgSeperation(double frequencySeparationInHz);
+       
+      (9) Enable function LP_AnalyzeCCDF(); two vector measurement results:
+
+	   (a)  "prob"	        // Real vector containing CCDF probability values (Y-axis of CCDF plot)
+           (b)	"power_rel_dB"	// Real vector containing CCDF power relative to average power in dB values (X-axis of CCDF plot)
+
+      (10) Removed IQmeasure_very_fast.dll
+
+2. IQ2010
+       
+
+************************************************************************************************************
+IQmeasure 3.0.4 Release Note:  (2013-02-18)
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.8.0 )                IQapis 2.0.7.2                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.83.20
+
+1. IQxel
+
+       (1)  Adjust function aregument
+
+	IQMEASURE_API int		LP_InitTester(char *ipAddress, int IQxelConnectionType = 0 );
+
+ 	ipAddress: The IP address of the tester
+  	IQxelConnectionType: (Ignore for IQ2010/IQnxn/IQview/IQflex; always set as 0 for IQxel80; )
+ 	- =0: Default value for IQxel80
+ 	- =1: ROUT1 for IQxel160
+ 	- =2: ROUT2 for IQxel160
+ 	- =3: 160Mhz Mode for IQxel160
+
+ 
+
+
+       (2) Removed two functions LP_SetTesterType() and LP_SetTesterTypeMimoConfig()
+	
+       (3) Add two functions LP_GetTesterType() and LP_GetTesterTypeMimoConfig() 
+
+       (4) Add an argument for LP_GetVsaSettings(.......................,int *triggertype)
+
+2. IQ2010
+
+       (1) Add an argument for LP_GetVsaSettings(.......................,int *triggertype)
+
+       (2)  Adjust function aregument
+
+	IQMEASURE_API int		LP_InitTester(char *ipAddress, int IQxelConnectionType = 0 );
+
+ 	ipAddress: The IP address of the tester
+  	IQxelConnectionType: (Ignore for IQ2010/IQnxn/IQview/IQflex; always set as 0 for IQxel80; )
+
+
+*************************************************************************************************************
+IQmeasure 3.0.3 Release Note:  (2012-12-20)
+
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.7.0 only)            IQapis 2.0.6.5                             
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.83
+
+1. IQxel
+
+      (1) Add the IQxel160 tester Initialization option
+
+	   LP_InitTester(char *ipAddress, int IQxelConnectionType = 1 )
+
+	   IQxelConnectionType (Ignore for IQ2010/IQnxn/IQview/IQflex; always set as 1 for IQxel80; for IQxel160)
+	    - =1: ROUT1 for IQxel160
+ 	    - =2: ROUT2 for IQxel160
+ 	    - =3: 160Mhz Mode for IQxel160 (not supported yet)
+
+      (2) Add the function for IQxel to check license availability 
+
+	   LP_CheckLicense(const char *licenseType, bool *returnResult)
+
+
+       
+************************************************************************************************************
+IQmeasure 3.0.2 Release Note:  (2012-11-13)
+
+
+Supports two types of testers
+
+       a. IQxel (Firmware v1.6.0 only)            IQapis 2.0.5.12                                   
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.83
+
+
+1. IQxel
+
+   Highlighted Note:
+     
+	a. IQmeasure_IQapi_SCPI does NOT work on FW version older than 1.6.0.
+        b. IQmeasure_SCPI is for example purpose, not fully functional.
+        c. IQmeasure_SCPI_Verifast is a new technology but not a friendly interface in IQmeasure layer, not recommend to use. 
+
+   New features:
+	
+	a. Add two functions for AGC window time (IQxel Only)
+
+		IQMEASURE_API int		LP_SetAgcWindowTime(double WindowTime = 0.005);
+
+	        IQMEASURE_API int		LP_GetAgcWindowTime(double *WindowTime);
+
+		Example code:
+
+		LP_SetAgcWindowTime(0.010);
+		LP_Agc();
+
+	b. Add 11b vector result "demodSymbols" which combines the constellation of "evmInPlcp" and "evmInPsdu "; removed earlier "evmInPlcp" (IQxel Only)
+
+		Example code:
+		
+		LP_Analyze11b();
+
+		demodSymbolsArrayLength = LP_GetVectorMeasurement("demodSymbols", demodSymbolsRealArray, demodSymbolsImagArray, MAX_BUFFER_SIZE);
+
+        c. Add 11b analysis option IQV_11B_STANDARD_2007_TX_ACC (11b Std TX accuracy) for function LP_Analyze80211b() (IQxel Only)
+
+        d. Add 11n and 11ac analysis option for 11n and 11 ac MIMO analysis (IQxel Only)
+		
+		Example Code:
+
+		int order[4] = {1,2,3,4};
+		LP_SetAnalysisParameterInteger("Analyze80211ac", "useAllSignals", 1);		
+		LP_SetAnalysisParameterIntegerArray("Analyze80211ac", "prefOrderSignals", order, 4);
+		LP_Analyze80211ac();
+
+  		useAllSignals:                
+   		0 = (default)use the first NStreams valid input signals for stream analysis  
+    		1 = use all valid input signals for stream analysis 
+    
+    		prefOrderSignals[N_MAX_TESTERS]:
+                Preference order used to select input signals if the "useAllSignals" parameter is set to a value of 0. Default: 1,2,3,4 (Use any permutation of the numbers 1,2,3, and 4)
+    
+                As an example, when you analyze a one-stream signal with the "useAllSignals" parameter set to 0 and the "prefOrderSignals" parameter set to [2 1 3 4], the analysis first checks the capture from VSA 2 			(input signal 2) for a valid signal. If the signal is valid, the analysis will be performed on capture from VSA 1 (input signal 1). If it is not valid, the next signal capture will be performed on capture 			1. This process is continued until the required number of valid signals has been found or until all available captures have been checked. In this case, the required number of valid signals is one, because 		this analysis is on a one-stream signal.
+   
+   
+
+   Bug fix:
+
+	a. Fixed the issue: when using 80Mhz sampling rate .iqvsg file, actual VSG sampling rate could be mismatched
+
+	b. Fixed the issue: When load the .iqvsg file internal in tester to VSG, can not send fixed number of packets
+
+        c. Fixed the issue: True-MIMO setup, each individual VSG power level unable to be set independently
+
+   Known issue:
+
+	a. If web GUI "Tools"->"Port Routing"->"Correction table" is applied, the IQmeasure_IQapi_SCPI measurement result will be off; reboot tester to resolve this issue.
+
+
+
+2. IQ2010
+
+	
+	IQapi upgraded to 1.8.83.
+
+
+
+
+************************************************************************************************************
+IQmeasure 3.0.1 Release Note:  (2012-09-13)
+
+
+Supports two types of testers
+
+       a. IQxel                                   IQapis 2.0.5                                   
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.82.2
+
+1. IQxel
+
+   Highlighted Note:
+     
+	a. IQmeasure_IQapi_SCPI based on IQapis 2.0.5 does NOT work on FW version older than 1.5.1.
+        b. IQmeasure_SCPI is for example purpose, not fully functional
+
+   New features:
+
+	a. Adjust the freq correction option for 11ac analysis, using LTF as default	
+	
+        b. Enable select arbitary portion of preamble to do power analyze, for 11 a/b/g/n/ac technology analysis 
+	   
+	   example:
+                 LP_Analyze80211ac(..    double prePowStartSec = 8.8e-6, double prePowStopSec = 15.2e-6);
+                 result = LP_GetScalarMeasurement("powerPreambleDbm");
+        
+        c. Provide spectrum flatness result for 11 a/g/n/ac technology analysis"spectralFlatness""spectralFlatnessHighLimit""spectralFlatnessLowLimit", each of them is one-dimension array, only real number is valid; 
+            
+	   example:
+		 LP_Analyze80211ac();   
+		 SizeofFlatness  = LP_GetVectorMeasurement("spectralFlatness", SpectrumFlatnessReal, SpectrumFlatnessImag,MAX_BUFFER_SIZE);
+		 SizeofHighLimit = LP_GetVectorMeasurement("spectralFlatnessHighLimit", SpectrumHighLimitReal, SpectrumHighLimitImag,MAX_BUFFER_SIZE);
+		 SizeofLowLimit  = LP_GetVectorMeasurement("spectralFlatnessLowLimit", SpectrumLowLimitReal, SpectrumLowLimitImag,MAX_BUFFER_SIZE);
+ 
+        d. Add function LP_SetDefault() to set the IQxel to the defualt status
+           	
+        e. Add function LP_SetVsgModulation_SetPlayCondition() to decide after load waveform VSG automatically transmits or not
+
+        f. Add function LP_ScpiCommandSet() and LP_ScpiCommandQuery() to send SCPI command and inquiry
+	   
+	   example of query VSG frequency:
+
+		char response[40];
+ 
+                unsigned int actual_size;
+	
+		LP_ScpiCommandSet("VSG");
+			
+                LP_ScpiCommandQuery("FREQ?",40,response,&actual_size);
+     			
+                printf("%s", response);		
+
+        h. IQxel flatform does not support VSA reference level below -20dBm, when set the reference level below -20 dBm, will automatically set the ref level as -20 dBm instead of return error 
+
+
+   
+   Known Issues:
+
+        a. when use 80Mhz sampling rate waveform to do loopback test (IQxel VSG to VSA) may have issue that VSG is not set in correct sampling rate.
+ 
+        b. 11ag Channel estimation result has issue
+
+
+2. IQ2010 
+
+   Changes:
+	
+	a. 11 a/b/g/n technology analysis function auguments changes to have consistent interface with IQxel	
+
+	   LP_Analyze80211ac(..    double prePowStartSec = 8.8e-6, double prePowStopSec = 15.2e-6);
+            
+	   But the added two settings are ignored by IQ2010
+
+          
+        b. Add one argument for LP_SetVsgModulation_SetPlayCondition(), but it is for IQxel, ignored for IQ2010  
+           LP_SetVsgModulation_SetPlayCondition(..  int loadInternalWaveform);
+	   LP_SetVsgModulation(бн int loadInternalWaveform);
+
+        c. GPS CW support frequency offset LP_GPS_ContinueWave(бн..int freqOffset);
+
+
+
+
+***************************************************************************************************
+IQmeasure 3.0.0 Release Notes: (2012-08-03)
+
+
+Supports two types of testers
+
+       a. IQxel                                   IQapis 2.0.1.67                                   
+       b. IQ2010/IQnxn/IQnxn plus/IQview/IQflex   IQapi  1.8.82.2
+
+1. IQxel new feature:
+
+       a. Support Dual head on IQxel FW 1.4.0
+
+          -LP_DualHead_ConOpen ()
+          -LP_DualHead_GetTokenID ()
+          -LP_DualHead_ObtainControl ()
+          -LP_DualHead_ReleaseControl ()             	
+
+       b. Support statistic EVM (for 11ac only)
+           
+          -IQmeasure.h decalration LP_Analyze80211ac()
+
+       c. EVM measurement improvement
+
+          -IQmeasure.h LP_Analyze80211ac(..  int frequencyCorr = 3,  ...)
+
+       d. Retrieve raw PSDU "0"/"1" for 11ac packet analysis
+
+       e. New 11b EVM caculation for new IEEE 2012 standard 
+  
+
+2. IQ2010 new feature:
+
+       a. HT40 mask accuracy improvement 
+
+       b. New 11b EVM caculation for new IEEE 2012 standard 
+
+***************************************************************************************************
